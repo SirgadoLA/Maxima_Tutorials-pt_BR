@@ -1,4 +1,4 @@
-# Maxima_Tutorials-pt
+# Maxima_Tutorials-pt_BR
 Sirgado, L.A. Maxima Tutorials, Maxima Computational Algebra System Series v.1,2018.
 
 This is a Maxima Tutorial Series for beginners. Only in portuguese at this time.
