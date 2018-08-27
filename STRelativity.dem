@@ -1,0 +1,6 @@
+
+load("STRelativity.mac");
+c_light_vel;
+ev(time_dil(50,290000000),numer);
+time_dil(50,299792458);
+time_dil(50,300000000);

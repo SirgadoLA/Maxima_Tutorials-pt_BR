@@ -1,0 +1,589 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 17.10.1 ] */
+/* [wxMaxima: title   start ]
+Volume I_- Tutorial 06
+Manipulando sequências e séries
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Tutoriais do Maxima, Série Sistema de Álgebra Computacional Maxima,
+versão 1, 2018
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+Prólogo
+
+* Neste tutorial iremos criar e manipular sequências e séries no Maxima.
+* Este é um tutorial elaborado para iniciantes na utilização do Maxima e wxMaxima.
+* Um exemplo dos possíveis resultados gráficos é exibido abaixo como amostra: Figura 01
+* Forme o hábito de sempre consultar as ajudas dos (wx)Maxima para a utilização dos comandos e de suas opções.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: caption start ]
+Amostra do gráfico obtido na seção 2.0 - série de Madhava–Leibniz
+   [wxMaxima: caption end   ] */
+/* [wxMaxima: image   start ]
+jpg
+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
+   [wxMaxima: image   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* sequências e séries podem ser geradas e manipuladas no Maxima de diferentes formas.
+* os operadores de atribuição e as funções do Maxima tratam e processam(ou não) de forma diferente cada uma das formas.
+* elementos chave: listas, função ' sum ', função 'limit ',  função 'tlimit '.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+Informações
+* referências:
+[1] Königsmann, G.; Wilson, M.; Zandt J. V. The wxMaxima user’s manual, 2017 obtido em https://github.com/andrejv/wxmaxima/blob/master/info/wxmaxima.html
+[2] Maxima 5.41.0 Manual, 2017 obtido em http://maxima.sourceforge.net/docs/manual/maxima.html
+* citação:
+Sirgado, L. A. Maxima Tutorials, Maxima Computational Algebra System Series, v. 1, 2018.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: section start ]
+Criando e atribuindo sequências e séries
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Criando e atribuindo sequências
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* sequências(sucessões) e séries.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+Inicialmente iremos definir, não formalmente, o que sejam sequência e série.
+* sequência é uma função cujo domínio é o conjunto dos números naturais e seu contradomínio é um conjunto de termos.
+* uma série é a soma dos termos de uma sequência (neste texto não faremos distinção incluindo qualquer representação).
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Sequências(Listas) e sua manipulação no Maxima
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* uma sequência no Maxima pode ser armazenada como dado em uma variável do tipo 'list', esta pode armazenar diversos tipos de dados.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eu_sou_uma_lista:[1/1,-1/3,+1/7,-1/11,+1/13]$ /*o terminador '$' omite o resultado*/
+eu_sou_uma_sequencia:eu_sou_uma_lista$
+eu_sou_uma_sequencia; /*a lista é uma forma de armazenar dados no Maxima que*/
+                      /*é adequada para armazenar e manipular uma sequência*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* podemos acessar o conteúdo da lista utilizando a forma abaixo.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+a:4$
+eu_sou_uma_sequencia[1];
+eu_sou_uma_sequencia[a];
+eu_sou_uma_sequencia[2];
+eu_sou_uma_sequencia[3];
+eu_sou_uma_sequencia[4];
+eu_sou_uma_sequencia[5];
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* podemos alterar o conteúdo da lista, por exemplo, utilizando a forma abaixo.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+a:4$
+eu_sou_uma_sequencia[1]:3$
+eu_sou_uma_sequencia[2]:3^2$
+eu_sou_uma_sequencia[3]:3*3*3$
+eu_sou_uma_sequencia[a]:3^a$
+eu_sou_uma_sequencia[5]:3^5$
+eu_sou_uma_sequencia;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(a); /*remove a variável 'a'*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(eu_sou_uma_sequencia); /*remove a variável 'eu_sou_uma_sequencia'*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eu_sou_uma_sequencia;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+a função 'cons'
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+a função 'cons' permite inserir um elemento na primeira posição de uma lista.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+[];        /*cria uma lista sem elementos*/
+cons(2,%); /*a variável '%' armazena a última saída calculada do Maxima*/
+cons(1,%);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+cons(2,[3,4,5,6,7]);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+list_1to7:cons(1,%); /*a variável '%' armazena a última saída calculada do Maxima*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+a função 'endcons'
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+a função 'endcons' permite inserir um elemento na última posição de uma lista.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+endcons(7,[1,2,3,4,5,6]);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+list_1to8:endcons(8,%); /*a variável '%' armazena a última saída calculada do Maxima*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+a função 'makelist'
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+a função 'makelist' permite criar uma lista a partir do termo geral de sequência.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+makelist(k,k,12);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+makelist(k^-1,k,12);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+makelist((k-1)^2-12*(k-1)+4,k,13);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+makelist('((k-1)^2-12*(k-1)+4)/((k+1)^2*'k),k,4); /*o operador ' previne a avaliação parcial da expressão*/
+         /*a parte do divisor '(k+1)^2' é avaliado pois se encontra fora dos parêntesis dos operadores ' */
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+makelist('(((k-1)^2-12*(k-1)+4)/((k+1)^2*k)),k,4); /*o operador ' previne a avaliação total da expressão*/
+         /*aqui lista gerou apenas quatro repetições da mesma expressão, mas é apenas uma exemplificação*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+a função 'create_list'
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+a função 'create_list' permite criar uma lista a partir de uma regra de substituição.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+create_list(y*2*x,x,list_1to8);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+create_list(k*y^2,k,%); /*a variável '%' armazena a última saída calculada do Maxima*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+create_list(k/y^3,k,%); /*a variável '%' armazena a última saída calculada do Maxima*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+as funções 'lmax' e 'lmin'
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+as funções 'lmax' e 'lmin' retorna os valores máximo e mínimo, respectivamente, de uma lista.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+exemp_list:[1/2,3,4,5,6,7,8,9,10,11,12];
+lmax(exemp_list); /*retorna o valor máximo de uma lista*/
+lmin(exemp_list); /*retorna o valor mínimo de uma lista*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+Calculando o PI utilizando a série de Madhava–Leibniz
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: subsect start ]
+a função ' sum ' para o cálculo de séries
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* a série de Madhava–Leibniz aproxima o valor de PI/4 para a sequência: 1/1-1/3+1/5-1/7+1/9...
+* abaixo temos algumas representações da série utilizando a função ' sum '
+* são também gerados os gráficos dessas representações utilizando a função ' wxplot2d '
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+4*(1-1/3+1/5-1/7+1/9-1/11+1/13-1/15+1/17-1/19), numer;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+4*((1/1+1/5+1/9+1/13+1/17)-(1/3+1/7+1/11+1/15+1/19)), numer;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+sum(1/(4*k+1),k,0,4), numer;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+-sum(1/(4*k+3),k,0,4), numer;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+4*(%o41+%o42);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* a série tem uma baixa convergência, para 4000 termos a precisão é pequena.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+4*(sum(1/(4*k+1),k,0,4000)-sum(1/(4*k+3),k,0,4000)), numer;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* o gráfico de convergência da série é mostrado abaixo para 20 termos.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ypi_1:4*(sum(1/(4*x+1),x,0,x)-sum(1/(4*x+3),x,0,x));
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+wxplot2d([ypi_1,ypi_1,%pi],[x,0,20],[y,2.65,3.3],
+    [style, points, lines, lines],
+    [color, yellow, blue, black],
+    [point_type, bullet],
+    [title, "PI Convergence"],
+    [xlabel, "summation terms"],
+    [ylabel, "PI value approximation"],
+    [legend, "points", "false curve", "PI"]
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+utilizando as funções ' rat ', ' simplify_sum ' e ' ratsimp '
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* podemos utilizar a função ' rat ' para encontrar a forma racional comum às duas frações do termo da série.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+rat(ypi_2=4*(1/(4*x+1)-1/(4*x+3)),ypi_2 , x);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+8*sum(1/(16*x^2+16*x+3), x, 0, inf);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* podemos utilizar a função ' simplify_sum ' para encontrar a forma simplificada da série.
+* o pacote ' simplify_sum ' tem de ser carregado utilizando ' load '.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+load(simplify_sum)$
+simplify_sum(8*sum(1/(16*x^2+16*x+3), x, 0, inf));
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* que na forma de ponto flutuante reconhecemos como o π.
+    * um simples cancelamento dos termos levaria ao mesmo resultado.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+load(simplify_sum)$
+simplify_sum(8*sum(1/(16*x^2+16*x+3), x, 0, inf))$
+%, numer;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* ou ainda podemos utilizar a função ' ratsimp ' para simplificar a equação e também encontrar o π.
+
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ratsimp(8*((%pi/2-3*log(2))/8-(-3*log(2)-%pi/2)/8));
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* na sua forma original a série precisa de uma grande quantidade de termos para ganhar alguma precisão.
+* a função ' ev ' avalia a expressão e exibe o valor.
+* a função ' print ' mostra os resultados anexados aos textos de identificação.
+* comparamos com o valor de π interno em formato de ponto flutuante:
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ypi_4:8*sum((1/(16*x_vl^2-16*x_vl+3)),x_vl,1,21098)$
+print("aproximação pela série: ",ev(ypi_4, numer))$
+print("   valor interno em 'float': ",(float(%pi)))$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+abaixo o gráfico com 100 termos.
+* com a série iniciando em 0.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ypi_2:8*sum(1/(16*x^2+16*x+3), x, 0, x);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+wxplot2d([ypi_2,ypi_2,%pi],[x,0,100],[y,2.65,3.3],
+    [style, points, lines, lines],
+    [color, yellow, blue, black],
+    [point_type, bullet],
+    [title, "PI Convergence"],
+    [xlabel, "summation terms"],
+    [ylabel, "PI value approximation"],
+    [legend, "points", "false curve", "PI"]
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ypi_3:8*sum(1/(16*x^2-16*x+3),x,1,x);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* abaixo o gráfico com 500 termos.
+* com a série iniciando em 1 e o termo em x^1 negativo.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+wxplot2d([ypi_3,ypi_3,%pi],[x,1,500],[y,2.65,3.3],
+    [style, points, lines, lines],
+    [color, yellow, blue, black],
+    [point_type, bullet],
+    [title, "PI Convergence"],
+    [xlabel, "summation terms"],
+    [ylabel, "PI value approximation"],
+    [legend, "points", "false curve", "PI"]
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+utilizando a função ' limit '
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* a função ' limit ' calcula o limite, nestes casos do termo de sequências e de séries
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+* exemplos para alguns termos gerais de sequências
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit(7.5+1/n,n,inf);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit(t+1/n,n,inf);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit((-1)^n*n,n,inf);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit((-1)^n*n,n,4);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit((-1)^n*n,n,5);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit(cos(n)/(2*n),n,inf);
+/* [wxMaxima: input   end   ] */
+/* [wxMaxima: answer  start ] */
+positive
+;
+/* [wxMaxima: answer  end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit((n-1)/n,n,inf);
+/* [wxMaxima: input   end   ] */
+/* [wxMaxima: answer  start ] */
+positive
+;
+/* [wxMaxima: answer  end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit(7^n/(5^n*n!),n,inf);
+/* [wxMaxima: input   end   ] */
+/* [wxMaxima: answer  start ] */
+positive
+;
+/* [wxMaxima: answer  end   ] */
+
+
+/* [wxMaxima: comment start ]
+* exemplos para alguns termos gerais de séries
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit(sum(1/(n*(n+1)),n,1,9),n,inf);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+sum(1/(n*(n+1)),n,1,inf); /*termo geral da série telescópica*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+load(simplify_sum)$
+simplify_sum(sum(1/(n*(n+1)),n,1,inf));
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit(sum((-1)^(n+1),n,1,10),n,inf);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit(sum((-1)^(n+1),n,1,9),n,inf);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit(sum((-1)^(n+1),n,1,minf),n,inf);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit(sum(n,n,1,minf),n,inf);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit(sum(n,n,1,inf),n,inf);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit('sum(3*4^(n-1),n,1,12),n,inf); /*o operador ' não permite a avaliação do somatório*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+load(simplify_sum)$
+simplify_sum(sum(a*r^(n-1),n,1,n)); /*termo geral da série geométrica*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+limit(sum(3*4^(n-1),n,1,12),n,inf);
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

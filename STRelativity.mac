@@ -1,0 +1,8 @@
+
+c_light_vel:[299792458,"m/s"];
+Lorentz_factor(v):=block([c],c:299792458,if v <= c then return(1/sqrt(1-v^2/c^2)) else return(concat(string(1/sqrt(1-v^2/c^2)),"; 'v' is a superluminal")));
+time_dil(Δt,v):=block([c],c:299792458,if v <= c then return(Δt*sqrt(1-v^2/c^2)) else return(concat(string(Δt*sqrt(1-v^2/c^2)),"; 'v' is a superluminal")));
+Lorentz_x_t_dirSpTmRt(t,v,x):=block([c],c:299792458,if v <= c then return((1/sqrt(1-v^2/c^2))*(x-(v*x)/c^2)) else return(concat(string((1/sqrt(1-v^2/c^2))*(x-(v*x)/c^2)),"; 'v' is a superluminal")));
+Lorentz_x_x_dirSpTmRt(v,x):=block([c],c:299792458,if v <= c then return((1/sqrt(1-v^2/c^2))*(x-v*t)) else return(concat(string((1/sqrt(1-v^2/c^2))*(x-v*t)),"; 'v' is a superluminal")));
+Lorentz_x_y_dirSpTmRt(v,y):=block([c],c:299792458,if v <= c then return(y) else return(concat(string(y)+" ; 'v' is a superluminal")));
+Lorentz_x_z_dirSpTmRt(v,z):=block([c],c:299792458,if v <= c then return(z) else return(concat(string(z),"; 'v' is a superluminal")));

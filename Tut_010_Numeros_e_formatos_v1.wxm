@@ -1,0 +1,622 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 17.10.1 ] */
+/* [wxMaxima: title   start ]
+Volume I - Tutorial 10
+Números e formatos numéricos
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Tutoriais do Maxima, Série Sistema de Álgebra Computacional Maxima,
+versão 1, 2018
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+Prólogo
+
+* Neste tutorial iremos aprender como o Maxima opera com representações numéricas e
+como podemos manipular os resultados dessas representações.
+* Este é um tutorial elaborado para iniciantes na utilização do Maxima e wxMaxima.
+* Um exemplo dos possíveis resultados gráficos é exibido abaixo como amostra: Figura 01
+* Forme o hábito de sempre consultar as ajudas dos (wx)Maxima para a utilização dos comandos e de suas opções.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+* O Maxima manipula números de diferentes maneiras devendo a escolhida ser coerente com o escopo do cálculo,
+   neste tutorial abordamos algumas das caracteristicas desses formatos, ou representações, como preferimos.
+* iremos abordar as principais diferenças e as funções relacionadas com a utilização e manipulação de representações.
+* elementos chave: números, números racionais, expressões, funções: 'numer', 'float', 'bfloat', 'fpprec', 'fpprintprec',
+'bftrunc', 'rationalize'.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+Informações
+* referências:
+[1] Königsmann, G.; Wilson, M.; Zandt J. V. The wxMaxima user’s manual, 2017 obtido em https://github.com/andrejv/wxmaxima/blob/master/info/wxmaxima.html
+[2] Maxima 5.41.0 Manual, 2017 obtido em http://maxima.sourceforge.net/docs/manual/maxima.html
+* citação:
+Sirgado, L. A. Maxima Tutorials, Maxima Computational Algebra System Series, v. 1, 2018.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: section start ]
+Formatos numéricos
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Os formatos numéricos no Maxima
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+Os formatos de números em Maxima são:
+
+* Inteiros
+* Racionais
+* Constantes irracionais
+* Ponto flutuante
+* Ponto flutuante de precisão arbitrária
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Números inteiros 'integer'
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+123;
+100000000;
+1;
+242495834657188327469828000158425079508318196000000000;
+
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+val_123:123;
+if integerp(val_123) then type:integer else type:noninteger;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+val_1:1.0; /*a casa decimal indica que este é um float, logo não é do tipo 'integer'*/
+if integerp(val_1) then type:integer else type:noninteger;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+integerp(100);
+integerp(100.01);
+integerp(100000000+1);
+integerp(100000000+1.0); /*o formato float provoca a propagação dos resultados em float*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Números racionais 'rational'
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+1/100;
+3/5;
+1/123456789;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+integerp(1/100);
+integerp(3/5);
+integerp(1/123456789);
+integerp(1/1); /*o valor 1/1 é avaliado como inteiro '1'*/
+integerp(200/10); /*o valor 100/10 é avaliado como inteiro '20'*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+rationalize(2.75); /*a função rationalize converte valores para o formato racional*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+rationalize(14.12512512512512);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+rationalize(14.125);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+rationalize(123.1);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+rationalize(0.25); rationalize(0.5); rationalize(0.75);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Constantes irracionais
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+π;
+%pi;
+%phi;
+sqrt(2);
+%e;
+%e, numer;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* nestes casos nos cálculos os valores podem ser manipulados como constantes algébricas.
+* podendo ou não ser convertidos para resultados numéricos dependendo do contexto.
+* verifique que a constante 'e' tem de ser forçada pelo modificador 'number' para exibir seu valor numérico.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Números em ponto flutuante 'float'
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+1.2;
+4.34050505050505;
+1/10, numer; /*transforma o racional 1/10 em float*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+2, numer; /*o inteiro 2 mantém o formato*/
+integerp(%); /*testa o valor como inteiro*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+2.0; /*formato em ponto flutuante*/
+integerp(%); /*testa o valor como inteiro*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Números em ponto flutuante de precisão arbitrária 'bfloat'
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+a:3, bfloat;
+%pi, bfloat;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+fpprec:24$        /*ajusta o comprimento do 'bigfloat' para 24 dígitos*/
+fpprintprec:24$   /*ajusta a exibição do 'bigfloat' para 24 dígitos*/
+bfloat(%pi); /*transforma o float em bfloat*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Ajustando o formato para números de alta precisão
+* verifique que abaixo existe um truncamento devido ao formato inicial ser considerado um float.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ab_r:rationalize(1.123456789876543210); /*converte para número racional*/
+a:num(ab_r), bfloat; /*extrai o numerador*/
+b:denom(ab_r), bfloat; /*extrai o denominador*/
+                       /*veja abaixo o resultado da razão 'a/b'*/
+
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+1.123456789876543210, bfloat; /*transforma o float em bfloat*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+a/b; /*resultado da razão 'a/b', não é o valor original está truncado*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Ajustando o formato para números de alta precisão
+* forçando a entrada em 'bfloat' obtemos o número exato.
+* o numerador é convertido em inteiro com a retirada do ponto decimal.
+* o denominador é 10^n onde n é o número de casas decimais originais do número.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+a:112345678987654321, bfloat; /*numerador*/
+b:100000000000000000, bfloat; /*denominador*/
+                       /*veja abaixo o resultado da razão 'a/b'*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+a/b; /*resultado da razão 'a/b', agora calculado com o formato bfloat*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+rationalize(a/b); /*este é o racional exato do valor inicial*/
+%, bfloat;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* nas seções abaixo serão discutidos com maior detalhe os formatos float e bfloat.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Algumas exemplificações simples de conversão entre formatos
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+b:1.2, bfloat; /*converte a atribuição para bfloat*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+b;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+%, numer; /*converte para float*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+%pi*b; /*mantem o formato de constante para o PI*/
+%, numer; /*força a saída em float*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+solve(%i1=3.17*x,x); /*solve chama rat e converte o formato para racional*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ev(3*x^2+7*x+5, x=1/3,float); /*converte para float: com perdas na mantissa*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ev(3*x^2+7*x+5, x=1/3); /*mantem o resultado em racional: é exato*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+numerval(a1, 2); /*atribue o valor 2, tipo integer na variável 'a1'*/
+a1;
+a1, numer;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+numerval(a2, bfloat(2)); /*atribue o valor 2, tipo bfloat na variável 'a2'*/
+a2;
+a2, numer;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+a1*17/24, numer; /*converte a saída para float*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+rationalize(0.333333333);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+fpprec:32;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+bfloat(1/3);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+1/3, bfloat;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+1/3, numer;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+O modificador 'numer' e as funções 'float' e 'bfloat'
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* a função 'float' converte inteiros, números racionais e números em formato 'bigfloat' para o formato 'float'
+* exemplos:
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+123;
+float(123);/*converte um inteiro para o formato em ponto flutuante*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+1/123;
+float(1/123);/*converte um número racional para o formato em ponto flutuante*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+fpprec:64$            /*ajusta o comprimento do 'bigfloat' para 64 dígitos*/
+fpprintprec:64$       /*ajusta a exibição do 'bigfloat' para 64 dígitos*/
+bfloat(1/123);        /*cria um 'bigfloat' com uma conveniente dízima periódica*/
+float(bfloat(1/123)); /*converte um 'bigfloat' para o formato em ponto flutuante*/
+                      /*a conversão trunca a dízima com um arredondamento para mais*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* o modificador 'numer' força a exibição de inteiros, números racionais para formato em ponto flutuante
+* adicionalmente força a avaliação como por exemplo, de expressões com a função exponencial e
+variáveis definidas com 'numerval'.
+* exemplos:
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+123;
+123, numer;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+1/123;
+float(1/123), numer;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+o modificador 'numer' aplica a função 'float' internamente, isso deve ser levado em consideração
+especialmente se utilizarmos formatos de ponto flutuante maiores nas operações.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+* a utilização do bfloat permite operar com números de precisão arbitrária definidos pelo usuário.
+* o termo "precisão arbitrária" é melhor definido por "precisão expandida" pois existem limites de utilização.
+* são utilizados para cálculos que necessitam de uma precisão maior que a oferecida pelo formato float.
+* um exemplo simples de tais cálculos são os cálculos de séries, abaixo vemos um exemplo.
+* neste exemplo pode-se alterar a variável 'indi_recur' para aumentar a precisão do π.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+π_ser:[];
+indi_ser:50000;
+fpprec:32; /*ajusta a precisão do formato 'bigfloat' para 32 dígitos*/
+
+/*cálculo do pi pela somatória da sequência π/4=1/1-1/3+1/5-1/7+1/9-1/11...*/
+π_ser:bfloat(4*(sum(1/(4*k+1),k,0,indi_ser)-sum(1/(4*k+3),k,0,indi_ser)));
+pi_float:%pi, numer;
+dif:pi_float-π_ser, numer; /*diferença entre os valores calculado e interno '%pi'*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Acurácia e precisão das representações e conversões de valores numéricos.
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* veja no exemplo abaixo:
+* a precisão, neste sentido, se refere ao tamanho da representação do número,
+ou seja 32 dígitos para a primeira saída e consideremos 19 dígitos  para a segunda, para simplificar o exposto.
+* a acurácia se refere ao quão próximas as representações estão do valor real '1/123'.
+    * na primeira e segunda saídas a acurácia e precisão são compatíveis com a representação.
+    * na terceira o modificador 'numer' aplica internamente a função 'float' e devolve um 'bfloat' de 32 dígitos.
+    * mas verificamos que apesar da precisão dos 32 dígitos iniciais temos uma acurácia de uns 19 dígitos.
+    * a mantissa foi degenerada e perde o sentido ter tal precisão sem a correspondente acurácia.
+* óbvio que a operação em questão somente tem sentido prático nesta nota para ilustração. 
+* deve-se ter atenção na utilização de comandos para manter controle sobre os resultados.
+* forme o hábito de sempre consultar as ajudas dos (wx)Maxima para a utilização dos comandos e de suas opções.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+fpprec:32$      /*ajusta os formatos de 'bigfloat'*/
+fpprintprec:32$
+bftrunc=false$
+
+bfloat(1/123);          /*formato 'bigfloat' de '1/123'*/
+float(bfloat(1/123));   /*conversão para 'float' de 'bfloat(1/123)'*/
+bfloat(1/123), numer;   /*utilização do modificador 'numer' em 'bfloat(1/123)'*/
+
+fpprec:16$      /*retorna aos formatos padrão de 'bigfloat'*/
+fpprintprec:16$
+bftrunc=true$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+Representações numéricas internas, um pouco além do dígito
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: comment start ]
+* o Maxima faz cálculos mas foi criado para manipular expressões algébricas e, 
+   por padrão muitas funções não retornam o valor numérico mas sim a expressão correspondente.
+    * ou ainda retorna o valor na forma de número racional.
+* o modificador 'numer' força o resultado, se possível, a ser exibido com o formato decimal.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+* um exemplo da utilização dos formatos e de suas peculiaridades são os cálculos com a fração 1/10.
+* sua representação em binário não é exata, o valor armazenado é '3602879701896397 / 36028797018963968' não '1/10'.
+    * veremos isso na sub-seções seguintes com maior detalhe
+* abaixo temos um exemplo sobre formatos do número 0,1 ou 1/10 na representação de número racional.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+1/10; /*um décimo, formato de número racional*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+%, numer; /*um décimo, formato de ponto flutuante*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+rationalize(%); /*um décimo, representação racional do */
+                /*valor armazenado como ponto flutuante*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+% -1/10;     /*diferença entre as duas representações*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+%, numer;   /*resultados em ambos os formatos do erro introduzido*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* o erro tem pequena magnitude, mas pode ser relevante em aplicações específicas.
+    * 5.551115123125783*10^-18 é o erro mostrado se seu sistema roda em 64 bits.
+* este erro é a magnitude de um erro de representação para ponto flutuante de 64 bits (double, binary64) .
+    * trabalhar, quando possível, com expressões algébricas e números racionais é uma boa estratégia.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+* em representações de ponto flutuante de 32 bits (single) podem ser encontrados erros destas magnitudes:
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+(0.000000001490116119384765625); /*erro + de "um bit a mais"*/
+(0.0000000059604644775390625);   /*erro - de "um bit a menos"*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* nessa representação, "um bit a mais" e "um bit a menos" se refere somente ao bit menos significativo,
+  do total de bits alocado para a mantissa, nesse caso os últimos 23 bits para um total de 32 bits (single).
+* como a representação é inexata sempre teremos "um bit a mais" ou "um bit a menos" em relação ao valor exato.
+* por hábito e pelo padrão, o bit menos significativo do formato IEEE 754 é o mais a direita da representação.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Um esboço de conversão em ponto flutuante no formato IEEE 754
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* iniciemos a conversão com a nossa fração pivô: 1/10
+* este é um esboço do cálculo da mantissa, o padrão tem detalhes aqui não abordados.
+    * o formato está exposto abaixo.
+    * |sinal:0| 0 |expoente:123| 01111011 |mantissa:5033165| 10011001100110011001101
+        * o sinal é positivo e fica igual a zero(bit),
+            * o expoente é zero mas nesse padrão temos de subtrair 127(dec.) do expoente.
+    * assim como não temos parte inteira (expoente) somente temos de calcular a mantissa.
+    * o processo consiste em multiplicar por dois sequencialmente até obter um inteiro,
+    * incluir esse inteiro na mantissa e retornar a multiplicar por dois a mantissa.
+    * isso se repete até a mantissa ser igual a zero ou até completar os 23 dígitos disponíveis.
+    * recordando: o sinal tem 1 dígito, a porção inteira tem 8 dígitos e a mantissa 23, totalizando 32 bits.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+1/10*2; %*2; %*2; %*2; /*multiplicamos por 2 até obter um inteiro*/
+                       /*com a parte decimal repetimos o processo*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+(%-1)*2; /*multiplicamos por 2 até obter um inteiro*/
+         /*o inteiro é removido e adicionado no bit correspondente*/
+         /*com a parte decimal repetimos o processo*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+(%-1)*2; %*2; %*2; /*multiplicamos por 2 até obter um inteiro*/
+    /*o inteiro é removido e adicionado no bit correspondente*/
+                   /*com a parte decimal repetimos o processo*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+(%-1)*2; /*multiplicamos por 2 até obter um inteiro*/
+         /*o inteiro é removido e adicionado no bit correspondente*/
+         /*com a parte decimal repetimos o processo*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+(%-1)*2; %*2; %*2; /*multiplicamos por 2 até obter um inteiro*/
+    /*o inteiro é removido e adicionado no bit correspondente*/
+                   /*com a parte decimal repetimos o processo*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+(%-1)*2; /*multiplicamos por 2 até obter um inteiro*/
+         /*o inteiro é removido e adicionado no bit correspondente*/
+         /*com a parte decimal repetimos o processo*/
+         /*o processo é interrompido com 23 dígitos*/
+         /*a representação obtida não é exata*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* ocorre um padrão: duas multiplicações menores que 1 e duas seguidas maiores que 1.
+    * ou seja em binário marcamos 00110011001100110011...
+* percebemos que o processo irá se repetir indefinidamente sem conclusão.
+* os 23 dígitos disponíveis serão preenchidos sem finalizarmos o respectivo número racional.
+* a representação falha em obter um valor exato para a fração 1/10.
+* este é um esboço do cálculo da mantissa, o padrão tem detalhes aqui não abordados.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+algumas formas equivalentes de representar o formato em ponto flutuante de 0,1.
+* |sinal| 0 |expoente| 01111011 |mantissa| 10011001100110011001101
+* | 00111101 | 11001100 | 11001100 | 11001101 |
+* 03d, 0cc, 0cc, 0cd
+   [wxMaxima: comment end   ] */
+
+
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

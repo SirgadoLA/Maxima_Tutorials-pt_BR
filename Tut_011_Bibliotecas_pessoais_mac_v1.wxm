@@ -1,0 +1,261 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 17.10.1 ] */
+/* [wxMaxima: title   start ]
+Volume I_- Tutorial 11
+Criando uma biblioteca pessoal '.mac'
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Tutoriais do Maxima, Série Sistema de Álgebra Computacional Maxima,
+versão 1, 2018
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+Prólogo
+
+* Neste tutorial iremos criar, salvar e utilizar uma biblioteca pessoal '.mac' no Maxima.
+* Este é um tutorial elaborado para iniciantes na utilização do Maxima e wxMaxima.
+* Forme o hábito de sempre consultar as ajudas dos (wx)Maxima para a utilização dos comandos e de suas opções.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+* O Maxima pode, além das bibliotecas padrão, receber o reforço de bibliotecas pessoais para resolver problemas. 
+* elementos chave: comandos 'stringout', 'load', 'demo', 'block'; funções; atribuidor de função: ' := ', função 'dispfun',
+arquivos de lote: '.mac' e '.dem'.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+Informações
+* referências:
+[1] Königsmann, G.; Wilson, M.; Zandt J. V. The wxMaxima user’s manual, 2017 obtido em https://github.com/andrejv/wxmaxima/blob/master/info/wxmaxima.html
+[2] Maxima 5.41.0 Manual, 2017 obtido em http://maxima.sourceforge.net/docs/manual/maxima.html
+* citação:
+Sirgado, L. A. Maxima Tutorials, Maxima Computational Algebra System Series, v. 1, 2018.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: section start ]
+Introdução às bibliotecas
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: comment start ]
+* uma biblioteca, no contexto deste tutorial, é uma coleção de instruções em Maxima.
+* são criados como qualquer documento do máxima e armazenados como texto para posterior utilização.
+* são criados pela função 'stringout' ou pelo atalho: Menu > File > Export > Save as type > Extensão: '.mac'.
+* neste tutorial iremos criar uma biblioteca simples que calcula algumas fórmulas da Relatividade Especial.
+* a biblioteca será salva e carregada no wxMaxima para a utilização das suas funções.
+* iremos ainda criar um arquivo de demonstração '.dem' para instruir aos usuários como utilizar suas funções.
+* demonstrações são criadas pela função 'stringout', ou pelo atalho:
+ Menu > File > Export > Save as type > Extensão: '.mac', substituindo posteriormente a extensão '.mac' por '.dem'.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: section start ]
+Corpo do programa de lotes(batch) 'STRelativity.mac'
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/*relatividade especial, fórmulas das transformações de Lorentz*/
+
+/* início da biblioteca em linhas de comando do Maxima*/
+299792458;
+c_light_vel:[299792458, "m/s"]$
+/*Reference*/
+/*Wilkie, T., Time to Remeasure the Metre, New Scientist, 100, No. 1381, 258-263, 27 October 1983.*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/*Fator de Lorentz*/
+
+Lorentz_factor(v):=block(
+    [c],
+    c: 299792458,
+    if (v <= c) then return(1/sqrt(1-v^2/c^2)) else return(concat(string(1/sqrt(1-v^2/c^2)),"; 'v' is a superluminal"))
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/*Dilatação do tempo para dois corpos com diferença de velocidade 'v'*/
+
+time_dil(Δt,v):=block(
+    [c],
+    c: 299792458,
+    if (v <= c) then return(Δt*sqrt(1-v^2/c^2)) else return(concat(string((Δt*sqrt(1-v^2/c^2))),"; 'v' is a superluminal"))
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/*Rotação espaço-temporal direta no tempo entre dois observadores em diferentes referênciais*/
+
+Lorentz_x_t_dirSpTmRt(t,v,x):=block( 
+    [c],
+    c: 299792458,
+    if (v <= c) then return((1/sqrt(1-v^2/c^2))*(x-v*x/c^2)) else return(concat(string(((1/sqrt(1-v^2/c^2))*(x-v*x/c^2))),"; 'v' is a superluminal"))
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/*Rotação espaço-temporal direta em x entre dois observadores em diferentes referênciais*/
+Lorentz_x_x_dirSpTmRt(v,x):=block( 
+    [c],
+    c: 299792458,
+    if (v <= c) then return((1/sqrt(1-v^2/c^2))*(x-v*t)) else return(concat(string(((1/sqrt(1-v^2/c^2))*(x-v*t))),"; 'v' is a superluminal"))
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/*Rotação espaço-temporal direta em y entre dois observadores em diferentes referênciais*/
+
+Lorentz_x_y_dirSpTmRt(v,y):=block( 
+    [c],
+    c: 299792458,
+    if (v <= c) then return(y) else return(concat(string(y)+" ; 'v' is a superluminal"))
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/*Rotação espaço-temporal direta em z entre dois observadores em diferentes referênciais*/
+Lorentz_x_z_dirSpTmRt(v,z):=block( 
+    [c],
+    c: 299792458,
+    if (v <= c) then return(z) else return(concat(string(z),"; 'v' is a superluminal"))
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/*relatividade especial fórmulas das transformações de Lorentz*/
+
+/* fim da biblioteca em linhas de comando do Maxima*/;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Salvando o arquivo de lotes utilizando 'stringout'
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* o comando 'stringout' lê as linhas de entrada indicadas gerando um texto que é enviado ao arquivo de saída.
+* para tal em 'stringout' são utilizadas as memórias das linhas de entrada das células acima para gerar o arquivo de lote.
+* neste exemplo ele salva o arquivo de lotes STRelativity.mac das linhas de entrada de 2 até 8: ' %i2...%i8 '.
+* salva apenas as células avaliáveis, sendo os comentários existentes não salvos.
+* a funçaõ 'block' força as variáveis a terem escopo local e descartam o valor depois de concluida a sequência do 'block',
+  neste exemplo é apenas a variável 'c' que é afetada em cada uma das funções da biblioteca acima.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+stringout("STRelativity.mac",%i2,%i3,%i4,%i5,%i6,%i7,%i8);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+Corpo do programa demonstração 'STRelativity.dem'
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: input   start ] */
+load("STRelativity.mac")$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+c_light_vel;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+time_dil(50,290000000), numer;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+time_dil(50,299792458);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+time_dil(50,300000000);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Salvando o arquivo de demonstração utilizando 'stringout'
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* o comando 'stringout' lê as linhas de entrada indicadas gerando um texto que é inviado ao arquivo de saída.
+* neste exemplo ele salva o arquivo de demonstração STRelativity.dem das linhas de entrada de 10 até 14: ' %i10...%i14 '.
+* salva apenas as células avaliáveis, sendo os comentários existentes não salvos.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+stringout("STRelativity.dem",%i10,%i11,%i12,%i13,%i14);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+Comandos de execução dos programas 'STRelativity.mac' e '.dem'
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: comment start ]
+* os comandos abaixo executam o arquivo de lotes e o arquivo de demonstração.
+* o arquivo de demonstração já possui a instrução de carregar o arquivo de lotes,
+   assim não necessita da instrução da célula abaixo, ver no corpo do programa de demonstração.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+load("STRelativity.mac")$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+demo("STRelativity.dem");
+/* [wxMaxima: input   end   ] */
+/* [wxMaxima: answer  start ] */
+;
+/* [wxMaxima: answer  end   ] */
+/* [wxMaxima: answer  start ] */
+;
+/* [wxMaxima: answer  end   ] */
+/* [wxMaxima: answer  start ] */
+;
+/* [wxMaxima: answer  end   ] */
+/* [wxMaxima: answer  start ] */
+;
+/* [wxMaxima: answer  end   ] */
+/* [wxMaxima: answer  start ] */
+;
+/* [wxMaxima: answer  end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Verificando quais funções estão carregadas na memória
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+dispfun(all);
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

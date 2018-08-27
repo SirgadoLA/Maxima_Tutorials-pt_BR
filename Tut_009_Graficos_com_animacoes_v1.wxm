@@ -1,0 +1,506 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 17.10.1 ] */
+/* [wxMaxima: title   start ]
+Volume I - Tutorial 09
+Introdução a animações em gráficos no Maxima
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Tutoriais do Maxima, Série Sistema de Álgebra Computacional Maxima,
+versão 1, 2018
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+Prólogo
+
+* Neste tutorial iremos aprender a utilizar as funções 'with_slider_draw'(2D), 'with_slider_draw3d',
+* os comandos 'wxanimate_draw'(2D), 'wxanimate_draw3d' são sinônimos dos respectivos acima.
+* Este é um tutorial elaborado para iniciantes na utilização do Maxima e wxMaxima.
+* Um exemplo dos possíveis resultados gráficos é exibido abaixo como amostra: Figura 01
+* Forme o hábito de sempre consultar as ajudas dos (wx)Maxima para a utilização dos comandos e de suas opções.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+* O Maxima possui diversos recursos e opções para criar e apresentar gráficos iremos conhecer esses recursos e opções de forma gradual e interativa neste tutorial.
+* elementos chave: with_slider_draw(2D), with_slider_draw3d, (wxanimate_draw(2D), wxanimate_draw3d). 
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+Informações
+referências:
+[1] Königsmann, G.; Wilson, M.; Zandt J. V. The wxMaxima user’s manual, 2017 obtido em https://github.com/andrejv/wxmaxima/blob/master/info/wxmaxima.html
+[2] Maxima 5.41.0 Manual, 2017 obtido em http://maxima.sourceforge.net/docs/manual/maxima.html
+[3] Maxima のアニメーション[Animação no Maxima] obtido em http://nonoishi.web.fc2.com/maxima/Maxima-anim.html em 2018.
+[4] Pascale, L.; Patic, P. C.; Dutã, L.; Runceanu, A. (2010). Modeling and Simulation of Cycloid Curves with Application in Robotics, Fiabilitate si Durabilitate n2(6).
+citação:
+Sirgado, L. A. Maxima Tutorials, Maxima Computational Algebra System Series, v. 1, 2018.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: section start ]
+Apresentando os comandos 'with_slider_draw' do wxMaxima
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: comment start ]
+os comandos 'with_slider(_draw)' permitem criar de forma simples uma animação 2D variando um parâmetro em uma expressão.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Gerando um gráfico simples
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* o comando 'with_slider_draw' utiliza uma variável para gerar diferentes curvas, neste exemplos utilizamos a variável ' k '.
+* uma lista é associada a essa variável fazendo com que as curvas sejam apresentadas na sequência da lista.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Variando a inclinação de uma reta
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+  with_slider_draw(
+        k,
+        [-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10],
+        title=concat("k=",k),
+        grid=true,
+        yrange=[-100,100],
+        explicit(k*x,x,-10,10)
+    )$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Variando o expoente de uma expressão
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+  with_slider_draw(
+        k,
+        [0,0.25,0.5,0.75,1,1.25,1.5,1.75,2,2.25,2.5,2.75,3,
+            2.75,2.5,2.25,1.75,1.5,1.25,1,0.75,0.5,0.25],
+        title=concat("k=",k),
+        grid=true,
+        yrange=[-1000,1000],
+        explicit(x^k,x,-100,100)
+    )$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Variando um dos termos de uma equação de curva
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+  with_slider_draw(
+        k,
+        [-250,-70,-16,-9,-5,-4,-3,-2,-1,0,1,2,3,4,5,9,16,70,250],
+        title=concat("k=",k),
+        grid=true,
+        explicit(k*x -x^2,x,-10,10)
+    )$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Manipulando a velocidade da animação com a opção 'wxanimate_framerate'
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* variando um dos termos de uma equação de curva, segundo exemplo com 'wxanimate_framerate'
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+  with_slider_draw(
+        k,
+        [-250,-70,-16,-9,-5,-4,-3,-2,-1,0,1,2,3,4,5,9,16,70,250,
+            70,16,9,5,4,3,2,1,0,-1,-2,-3,-4,-5,-9,-16,-70],
+        title=concat("k=",k),
+        grid=true,
+        explicit(k*x -x^2,x,-10,10)
+    ), wxanimate_framerate=12$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Gerando gráficos com listas geradas por 'makelist' para variável da animação
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Gerando uma lista simples
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+with_slider(
+k,
+makelist(i,i,-0.3,0.3,0.05),
+k*x^2,
+[x,-10,10],
+[y,-10,10]
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Gerando e mesclando listas simples
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* gerando a lista de variação de k, com um laço de exibição.
+* a função 'sort' organiza uma lista, neste caso a opção 'ordergreatp' inverte a lista inicial ordenando do maior para o menor valor.
+* a função 'append' gera uma lista com o conteúdo das listas argumento na ordem dos argumentos na função.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+makelist(i,i,-5,5)/7;
+sort(makelist(i,i,-4,4)/7,ordergreatp);
+append(makelist(i,i,-5,5)/7,sort(makelist(i,i,-4,4)/7,ordergreatp));
+loop_list:append(makelist(i,i,-5,5)/7,sort(makelist(i,i,-4,4)/7,ordergreatp));
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+* finalmente a variável 'loop_list' com a lista  gerada é inserido em  'with_slider'
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+with_slider(
+k,
+loop_list,
+k*x^2,
+[x,-9,9],
+[y,-9,9]
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Mais alguns exemplos de animações com curvas simples
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Curva das funções cos e acos aninhadas variando uma constante
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+with_slider_draw(
+    k,makelist(i/4,i,1,12),    
+    yrange = [-40,40],
+    title=concat("k=",float(k)),
+    grid=true,
+    explicit(cos(k*x+acos(k*x)),x,0,30)
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Emissão e reflexão de pulso de onda 
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+loop_lst2:append(makelist(i/10*i^2,i,1,17),sort(makelist(-i/10*i^2,i,1,17),orderlessp))$
+with_slider_draw(
+    k,loop_lst2,    
+    yrange = [-1,1],
+    title=concat("k=",float(k)),
+    grid=true,
+    explicit(x/(k*(1+(x/k)^2)),x,0,3)
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Pilha de círculos
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* o gráfico animado abaixo leva algum tempo para a renderização dos quadros.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+with_slider_draw(
+    k,makelist(i,i,1,30)/10,
+    proportional_axes = xy,
+    xrange = [-3,3],
+    yrange = [-3,3],
+    xaxis=true,
+    yaxis=true,
+    grid = true,
+    title = "Inside Circles" ,
+    label([sconcat("k= x^2+y^2=",k),0,-2.7]),
+    implicit(x^2+y^2=k,x,-3,3,y,-3,3)
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Gerando gráficos de animação com mais de uma curva
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Círculos, um girando e um parado
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ratprint:false$ /*desabilita mensagens de conversão da função rat*/
+with_slider_draw(
+    k,makelist(i,i,0,8)/8,
+    proportional_axes = xy,
+    xrange = [-3,3],
+    yrange = [-3,3],
+    xaxis=true,
+    yaxis=true,
+    grid = true,
+    title = "Circle loop" ,
+    label([sconcat("loop=",2*%pi*k),0,-2.7]),
+    implicit((x-2*cos(2*%pi*k))^2+(y-2*sin(2*%pi*k))^2=1/4
+        ,x,-3,3,y,-3,3),
+    implicit(x^2+y^2=9/4,x,-3,3,y,-3,3)
+), wxanimate_framerate=15$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Círculos, três girando e um parado
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* o gráfico animado abaixo leva algum tempo para a renderização dos quadros.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ratprint:false$ /*desabilita mensagens de conversão da função rat*/
+v_red:1$
+v_green:7/4$
+v_navy:5/2$
+with_slider_draw(
+    k,makelist(i,i,0,32)/4,
+    proportional_axes = xy,
+    xrange = [-3,3],
+    yrange = [-3,3],
+    xaxis=true,
+    yaxis=true,
+    grid = true,
+    title = "Circles race" ,
+    label([sconcat("loop=",2*%pi*k),0,-2.7]),
+    color=red,
+    implicit((x-2*cos(v_red*%pi*k))^2+(y-2*sin(v_red*%pi*k))^2=1/4
+        ,x,-3,3,y,-3,3),
+    color=green,
+    implicit((x-2*cos(v_green*%pi*k))^2+(y-2*sin(v_green*%pi*k))^2=1/4
+        ,x,-3,3,y,-3,3),
+    color=navy,
+    implicit((x-2*cos(v_navy*%pi*k))^2+(y-2*sin(v_navy*%pi*k))^2=1/4
+        ,x,-3,3,y,-3,3),
+    color=yellow,
+    implicit(x^2+y^2=9/4,x,-3,3,y,-3,3)
+), wxanimate_framerate=1$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Círculos e linhas
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+with_slider_draw(
+    k,makelist(i,i,1,7),
+    proportional_axes = xy,
+    xrange = [-3,3],
+    yrange = [-3,3],
+    xaxis=true,
+    yaxis=true,
+    grid = true,
+    title = "Circle and Lines" ,
+    label([sconcat("k=",(k-4)*sqrt(5)),1.5,-2.7]),    
+    color=red,
+    implicit(x^2+y^2=1,x,-3,3,y,-3,3),
+    color=blue,
+    explicit(2*x+(k-4)*sqrt(5),x,-3,3),
+    explicit(-2*x+(k-4)*sqrt(5),x,-3,3)
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Epicicloide
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* este gráfico gera epicicloides para valores inteiros positivos do parâmetro ' ik '.
+* insira um valor inteiro positivo na variável ' ik '.
+* valores altos são renderizados com dificuldade e causam erros na saída gráfica.
+* o gráfico animado abaixo leva algum tempo para a renderização dos quadros.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ik:1; /*insira um valor inteiro positivo*/
+rg:1;
+ik:abs(round(ik));
+if ik<1 then ik:1;
+k:1/ik;
+rg:k+2.5;
+with_slider_draw(
+    n,makelist(i,i,0,10), /*10*/
+    proportional_axes = xy,
+    xrange = [-rg,rg],
+    yrange = [-rg,rg],
+    xaxis=true,
+    yaxis=true,
+    xtics=1,
+    ytics=1,
+    nticks=(5000), /*configura a resolução das curvas*/
+    grid = true,
+    title = "Epicycloid",
+    label([sconcat("k=",ik," | radius ratio R/r=",ik,"/1"),0,-rg+rg/10]),
+    implicit((x-(k+1)*cos(2*%pi*n/10))^2+(y-(k+1)*sin(2*%pi*n/10))^2=k^2
+        ,x,-rg,rg,y,-rg,rg),
+    color=dark-green,
+    implicit(x^2+y^2=1,x,-rg,rg,y,-rg,rg),
+    color=yellow,
+    implicit(x^2+y^2=(1+2*k)^2,x,-rg,rg,y,-rg,rg),
+    color = red,
+    parametric((k+1)*cos(t)-k*cos(t*(1+k)/k), (k+1)*sin(t)-k*sin(t*(1+k)/k)
+        ,t,0,2*%pi*n/10)
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Hipocicloide
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+* este gráfico gera epicicloides para valores inteiros positivos do parâmetro ' ik '.
+* insira um valor inteiro positivo igual ou maior que 3 na variável ' ik '.
+* valores altos são renderizados com dificuldade e causam erros na saída gráfica.
+* o gráfico animado abaixo leva algum tempo para a renderização dos quadros.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ik:3; /*insira um valor inteiro positivo igual ou maior que 3*/
+rg:1;
+ik:abs(round(ik));
+if ik<3 then ik:3;
+k:1/(ik-2);
+rg:k+2.5;
+with_slider_draw(
+    n,makelist(i,i,0,10),
+    proportional_axes = xy,
+    xrange = [-rg,rg],
+    yrange = [-rg,rg],
+    xaxis=true,
+    yaxis=true,
+    nticks=(3000),
+    grid = true,
+    title = "Hypocycloid",
+    label([sconcat("k=",ik," | radius ratio R/r=",ik,"/1"),0,-rg+rg/10]),
+    implicit((x-(k+1)*cos(2*%pi*n/10))^2+(y-(k+1)*sin(2*%pi*n/10))^2=k^2
+        ,x,-rg,rg,y,-rg,rg),
+    color=dark-green,
+    implicit(x^2+y^2=(1+2*k)^2,x,-rg,rg,y,-rg,rg),
+    color=yellow,
+    implicit(x^2+y^2=1,x,-rg,rg,y,-rg,rg),
+    color = red,
+    parametric((k+1)*cos(t)+k*cos(t*(k+1)/k),(k+1)*sin(t)-k*sin(t*(k+1)/k)
+        ,t,0,2*%pi*n/10)
+)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+Apresentando o comando 'with_slider_draw3d' do wxMaxima
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Estrelas Matriosca
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: comment start ]
+os comandos 'with_slider_draw3d' permitem criar de forma simples uma animação 3D variando um parâmetro em uma expressão.
+* o gráfico animado abaixo leva algum tempo para a renderização dos quadros.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+rg:800$
+with_slider_draw3d(
+    k,
+    makelist(i*2,i,1,30),
+    dimensions=[500,500],
+    title="Matryoshka stars",
+    grid=true,
+    color=cyan,
+   implicit((k/1)*x^(48/100)+(k/1)*y^(48/100)+(k/1)*z^(48/100)=(k/1)^2,x,-rg,rg,y,-rg,rg,z,-rg,rg),
+    color=blue,
+   implicit((k/2)*x^(48/100)+(k/2)*y^(48/100)+(k/2)*z^(48/100)=(k/2)^2,x,-rg,rg,y,-rg,rg,z,-rg,rg),
+    color=navy,
+   implicit((k/4)*x^(48/100)+(k/4)*y^(48/100)+(k/4)*z^(48/100)=(k/4)^2,x,-rg,rg,y,-rg,rg,z,-rg,rg)
+    )$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsubsect start ]
+Giro de retas paralelas 3D
+   [wxMaxima: subsubsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+res:40$
+with_slider_draw3d(
+    n,makelist(k*5,k,1,res),
+    dimensions=[500,500],    
+    title="3D parallel lines",
+    xrange=[-2,2],
+    yrange=[-2,2],
+    color=red,
+    parametric(
+        (cos(n*2*%pi/res+%pi/2)-cos(n*2*%pi/res))*s+cos(n*2*%pi/res),
+        (sin(n*2*%pi/res+%pi/2)-sin(n*2*%pi/res))*s+sin(n*2*%pi/res),
+        -2*s+1,s,0,1),
+    color=cyan,
+    parametric(
+        (cos(n*2*%pi/res+%pi/2)-cos(n*2*%pi/res))*s+cos(n*2*%pi/res),
+        (sin(n*2*%pi/res+%pi/2)-sin(n*2*%pi/res))*s+sin(n*2*%pi/res),
+        -2*s+1.75,s,0,1)
+    )$
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
